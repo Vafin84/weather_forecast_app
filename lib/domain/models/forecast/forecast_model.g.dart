@@ -7,34 +7,23 @@ part of 'forecast_model.dart';
 // **************************************************************************
 
 _$_Forecast _$$_ForecastFromJson(Map<String, dynamic> json) => _$_Forecast(
-      cod: json['cod'] as String? ?? '',
-      message: (json['message'] as num?)?.toDouble() ?? 0.0,
-      cnt: json['cnt'] as int? ?? 0,
-      list: (json['list'] as List<dynamic>)
-          .map((e) => ListElement.fromJson(e as Map<String, dynamic>))
-          .toList(),
-      city: City.fromJson(json['city'] as Map<String, dynamic>),
+      cod: json['cod'] as int? ?? 0,
+      id: json['id'] as int? ?? -1,
+      name: json['name'] as String? ?? '',
+      weather: (json['weather'] as List<dynamic>?)
+              ?.map((e) => Weather.fromJson(e as Map<String, dynamic>))
+              .toList() ??
+          const <Weather>[],
+      main: Main.fromJson(json['main'] as Map<String, dynamic>),
+      wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$$_ForecastToJson(_$_Forecast instance) =>
     <String, dynamic>{
       'cod': instance.cod,
-      'message': instance.message,
-      'cnt': instance.cnt,
-      'list': instance.list.map((e) => e.toJson()).toList(),
-      'city': instance.city.toJson(),
-    };
-
-_$_ListElement _$$_ListElementFromJson(Map<String, dynamic> json) =>
-    _$_ListElement(
-      dt: json['dt'] as int? ?? 0,
-      main: Main.fromJson(json['main'] as Map<String, dynamic>),
-      wind: Wind.fromJson(json['wind'] as Map<String, dynamic>),
-    );
-
-Map<String, dynamic> _$$_ListElementToJson(_$_ListElement instance) =>
-    <String, dynamic>{
-      'dt': instance.dt,
+      'id': instance.id,
+      'name': instance.name,
+      'weather': instance.weather.map((e) => e.toJson()).toList(),
       'main': instance.main.toJson(),
       'wind': instance.wind.toJson(),
     };
@@ -48,7 +37,6 @@ _$_Main _$$_MainFromJson(Map<String, dynamic> json) => _$_Main(
       seaLevel: json['sea_level'] as int? ?? 0,
       grndLevel: json['grnd_level'] as int? ?? 0,
       humidity: json['humidity'] as int? ?? 0,
-      tempKf: json['temp_kf'] as int? ?? 0,
     );
 
 Map<String, dynamic> _$$_MainToJson(_$_Main instance) => <String, dynamic>{
@@ -60,7 +48,6 @@ Map<String, dynamic> _$$_MainToJson(_$_Main instance) => <String, dynamic>{
       'sea_level': instance.seaLevel,
       'grnd_level': instance.grndLevel,
       'humidity': instance.humidity,
-      'temp_kf': instance.tempKf,
     };
 
 _$_Wind _$$_WindFromJson(Map<String, dynamic> json) => _$_Wind(
@@ -75,20 +62,17 @@ Map<String, dynamic> _$$_WindToJson(_$_Wind instance) => <String, dynamic>{
       'gust': instance.gust,
     };
 
-_$_City _$$_CityFromJson(Map<String, dynamic> json) => _$_City(
+_$_Weather _$$_WeatherFromJson(Map<String, dynamic> json) => _$_Weather(
       id: json['id'] as int? ?? -1,
-      name: json['name'] as String? ?? '',
-      country: json['country'] as String? ?? '',
-      timezone: json['timezone'] as int? ?? 0,
-      sunrise: json['sunrise'] as int? ?? 0,
-      sunset: json['sunset'] as int? ?? 0,
+      main: json['main'] as String? ?? '',
+      description: json['description'] as String? ?? '',
+      icon: json['icon'] as String? ?? '',
     );
 
-Map<String, dynamic> _$$_CityToJson(_$_City instance) => <String, dynamic>{
+Map<String, dynamic> _$$_WeatherToJson(_$_Weather instance) =>
+    <String, dynamic>{
       'id': instance.id,
-      'name': instance.name,
-      'country': instance.country,
-      'timezone': instance.timezone,
-      'sunrise': instance.sunrise,
-      'sunset': instance.sunset,
+      'main': instance.main,
+      'description': instance.description,
+      'icon': instance.icon,
     };

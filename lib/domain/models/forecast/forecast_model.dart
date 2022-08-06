@@ -6,26 +6,15 @@ part 'forecast_model.g.dart';
 class Forecast with _$Forecast {
   @JsonSerializable(explicitToJson: true)
   const factory Forecast({
-    @Default('') String cod,
-    @Default(0.0) double message,
-    @Default(0) int cnt,
-    required List<ListElement> list,
-    required City city,
+    @Default(0) int cod,
+    @Default(-1) int id,
+    @Default('') String name,
+    @Default(<Weather>[]) List<Weather> weather,
+    required Main main,
+    required Wind wind,
   }) = _Forecast;
 
   factory Forecast.fromJson(Map<String, dynamic> json) => _$ForecastFromJson(json);
-}
-
-@freezed
-class ListElement with _$ListElement {
-  @JsonSerializable(explicitToJson: true)
-  const factory ListElement({
-    @Default(0) int dt,
-    required Main main,
-    required Wind wind,
-  }) = _ListElement;
-
-  factory ListElement.fromJson(Map<String, dynamic> json) => _$ListElementFromJson(json);
 }
 
 @freezed
@@ -39,7 +28,6 @@ class Main with _$Main {
     @JsonKey(name: 'sea_level') @Default(0) int seaLevel,
     @JsonKey(name: 'grnd_level') @Default(0) int grndLevel,
     @Default(0) int humidity,
-    @JsonKey(name: 'temp_kf') @Default(0) int tempKf,
   }) = _Main;
 
   factory Main.fromJson(Map<String, dynamic> json) => _$MainFromJson(json);
@@ -57,15 +45,13 @@ class Wind with _$Wind {
 }
 
 @freezed
-class City with _$City {
-  const factory City({
+class Weather with _$Weather {
+  const factory Weather({
     @Default(-1) int id,
-    @Default('') String name,
-    @Default('') String country,
-    @Default(0) int timezone,
-    @Default(0) int sunrise,
-    @Default(0) int sunset,
-  }) = _City;
+    @Default('') String main,
+    @Default('') String description,
+    @Default('') String icon,
+  }) = _Weather;
 
-  factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
+  factory Weather.fromJson(Map<String, dynamic> json) => _$WeatherFromJson(json);
 }

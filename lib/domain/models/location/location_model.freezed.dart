@@ -22,7 +22,7 @@ Location _$LocationFromJson(Map<String, dynamic> json) {
 mixin _$Location {
   String get name => throw _privateConstructorUsedError;
   @JsonKey(name: 'local_names')
-  LocalNames get localNames => throw _privateConstructorUsedError;
+  LocalNames? get localNames => throw _privateConstructorUsedError;
   double get lat => throw _privateConstructorUsedError;
   double get lon => throw _privateConstructorUsedError;
   String get country => throw _privateConstructorUsedError;
@@ -40,13 +40,13 @@ abstract class $LocationCopyWith<$Res> {
       _$LocationCopyWithImpl<$Res>;
   $Res call(
       {String name,
-      @JsonKey(name: 'local_names') LocalNames localNames,
+      @JsonKey(name: 'local_names') LocalNames? localNames,
       double lat,
       double lon,
       String country,
       String state});
 
-  $LocalNamesCopyWith<$Res> get localNames;
+  $LocalNamesCopyWith<$Res>? get localNames;
 }
 
 /// @nodoc
@@ -74,7 +74,7 @@ class _$LocationCopyWithImpl<$Res> implements $LocationCopyWith<$Res> {
       localNames: localNames == freezed
           ? _value.localNames
           : localNames // ignore: cast_nullable_to_non_nullable
-              as LocalNames,
+              as LocalNames?,
       lat: lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
@@ -95,8 +95,12 @@ class _$LocationCopyWithImpl<$Res> implements $LocationCopyWith<$Res> {
   }
 
   @override
-  $LocalNamesCopyWith<$Res> get localNames {
-    return $LocalNamesCopyWith<$Res>(_value.localNames, (value) {
+  $LocalNamesCopyWith<$Res>? get localNames {
+    if (_value.localNames == null) {
+      return null;
+    }
+
+    return $LocalNamesCopyWith<$Res>(_value.localNames!, (value) {
       return _then(_value.copyWith(localNames: value));
     });
   }
@@ -110,14 +114,14 @@ abstract class _$$_LocationCopyWith<$Res> implements $LocationCopyWith<$Res> {
   @override
   $Res call(
       {String name,
-      @JsonKey(name: 'local_names') LocalNames localNames,
+      @JsonKey(name: 'local_names') LocalNames? localNames,
       double lat,
       double lon,
       String country,
       String state});
 
   @override
-  $LocalNamesCopyWith<$Res> get localNames;
+  $LocalNamesCopyWith<$Res>? get localNames;
 }
 
 /// @nodoc
@@ -147,7 +151,7 @@ class __$$_LocationCopyWithImpl<$Res> extends _$LocationCopyWithImpl<$Res>
       localNames: localNames == freezed
           ? _value.localNames
           : localNames // ignore: cast_nullable_to_non_nullable
-              as LocalNames,
+              as LocalNames?,
       lat: lat == freezed
           ? _value.lat
           : lat // ignore: cast_nullable_to_non_nullable
@@ -174,7 +178,7 @@ class __$$_LocationCopyWithImpl<$Res> extends _$LocationCopyWithImpl<$Res>
 class _$_Location implements _Location {
   const _$_Location(
       {this.name = '',
-      @JsonKey(name: 'local_names') required this.localNames,
+      @JsonKey(name: 'local_names') this.localNames,
       this.lat = 0.0,
       this.lon = 0.0,
       this.country = '',
@@ -188,7 +192,7 @@ class _$_Location implements _Location {
   final String name;
   @override
   @JsonKey(name: 'local_names')
-  final LocalNames localNames;
+  final LocalNames? localNames;
   @override
   @JsonKey()
   final double lat;
@@ -248,7 +252,7 @@ class _$_Location implements _Location {
 abstract class _Location implements Location {
   const factory _Location(
       {final String name,
-      @JsonKey(name: 'local_names') required final LocalNames localNames,
+      @JsonKey(name: 'local_names') final LocalNames? localNames,
       final double lat,
       final double lon,
       final String country,
@@ -260,7 +264,7 @@ abstract class _Location implements Location {
   String get name;
   @override
   @JsonKey(name: 'local_names')
-  LocalNames get localNames;
+  LocalNames? get localNames;
   @override
   double get lat;
   @override

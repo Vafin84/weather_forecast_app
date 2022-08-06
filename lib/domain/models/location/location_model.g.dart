@@ -8,8 +8,9 @@ part of 'location_model.dart';
 
 _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
       name: json['name'] as String? ?? '',
-      localNames:
-          LocalNames.fromJson(json['local_names'] as Map<String, dynamic>),
+      localNames: json['local_names'] == null
+          ? null
+          : LocalNames.fromJson(json['local_names'] as Map<String, dynamic>),
       lat: (json['lat'] as num?)?.toDouble() ?? 0.0,
       lon: (json['lon'] as num?)?.toDouble() ?? 0.0,
       country: json['country'] as String? ?? '',
@@ -19,7 +20,7 @@ _$_Location _$$_LocationFromJson(Map<String, dynamic> json) => _$_Location(
 Map<String, dynamic> _$$_LocationToJson(_$_Location instance) =>
     <String, dynamic>{
       'name': instance.name,
-      'local_names': instance.localNames.toJson(),
+      'local_names': instance.localNames?.toJson(),
       'lat': instance.lat,
       'lon': instance.lon,
       'country': instance.country,

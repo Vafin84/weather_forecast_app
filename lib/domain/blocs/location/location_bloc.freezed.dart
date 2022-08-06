@@ -121,16 +121,26 @@ class __$$_RequestLocationEventCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_RequestLocationEvent implements _RequestLocationEvent {
-  const _$_RequestLocationEvent({this.request = ''});
+class _$_RequestLocationEvent
+    with DiagnosticableTreeMixin
+    implements _RequestLocationEvent {
+  const _$_RequestLocationEvent({this.request = ' '});
 
   @override
   @JsonKey()
   final String request;
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'LocationEvent.request(request: $request)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LocationEvent.request'))
+      ..add(DiagnosticsProperty('request', request));
   }
 
   @override
@@ -225,22 +235,22 @@ mixin _$LocationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Location> location) data,
-    required TResult Function() error,
+    required TResult Function(List<Location> locations) data,
+    required TResult Function(String message, String error) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -248,21 +258,21 @@ mixin _$LocationState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLocationState value) initial,
     required TResult Function(_DataLocationState value) data,
-    required TResult Function(_ErrorLocationState value) error,
+    required TResult Function(ErrorLocationState value) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -306,12 +316,20 @@ class __$$_InitialLocationStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_InitialLocationState implements _InitialLocationState {
+class _$_InitialLocationState
+    with DiagnosticableTreeMixin
+    implements _InitialLocationState {
   const _$_InitialLocationState();
 
   @override
-  String toString() {
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
     return 'LocationState.initial()';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties.add(DiagnosticsProperty('type', 'LocationState.initial'));
   }
 
   @override
@@ -327,8 +345,8 @@ class _$_InitialLocationState implements _InitialLocationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Location> location) data,
-    required TResult Function() error,
+    required TResult Function(List<Location> locations) data,
+    required TResult Function(String message, String error) error,
   }) {
     return initial();
   }
@@ -337,8 +355,8 @@ class _$_InitialLocationState implements _InitialLocationState {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
   }) {
     return initial?.call();
   }
@@ -347,8 +365,8 @@ class _$_InitialLocationState implements _InitialLocationState {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -362,7 +380,7 @@ class _$_InitialLocationState implements _InitialLocationState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLocationState value) initial,
     required TResult Function(_DataLocationState value) data,
-    required TResult Function(_ErrorLocationState value) error,
+    required TResult Function(ErrorLocationState value) error,
   }) {
     return initial(this);
   }
@@ -372,7 +390,7 @@ class _$_InitialLocationState implements _InitialLocationState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
   }) {
     return initial?.call(this);
   }
@@ -382,7 +400,7 @@ class _$_InitialLocationState implements _InitialLocationState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
     required TResult orElse(),
   }) {
     if (initial != null) {
@@ -401,7 +419,7 @@ abstract class _$$_DataLocationStateCopyWith<$Res> {
   factory _$$_DataLocationStateCopyWith(_$_DataLocationState value,
           $Res Function(_$_DataLocationState) then) =
       __$$_DataLocationStateCopyWithImpl<$Res>;
-  $Res call({List<Location> location});
+  $Res call({List<Location> locations});
 }
 
 /// @nodoc
@@ -417,12 +435,12 @@ class __$$_DataLocationStateCopyWithImpl<$Res>
 
   @override
   $Res call({
-    Object? location = freezed,
+    Object? locations = freezed,
   }) {
     return _then(_$_DataLocationState(
-      location: location == freezed
-          ? _value._location
-          : location // ignore: cast_nullable_to_non_nullable
+      locations: locations == freezed
+          ? _value._locations
+          : locations // ignore: cast_nullable_to_non_nullable
               as List<Location>,
     ));
   }
@@ -430,20 +448,30 @@ class __$$_DataLocationStateCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$_DataLocationState implements _DataLocationState {
-  const _$_DataLocationState({required final List<Location> location})
-      : _location = location;
+class _$_DataLocationState
+    with DiagnosticableTreeMixin
+    implements _DataLocationState {
+  const _$_DataLocationState({required final List<Location> locations})
+      : _locations = locations;
 
-  final List<Location> _location;
+  final List<Location> _locations;
   @override
-  List<Location> get location {
+  List<Location> get locations {
     // ignore: implicit_dynamic_type
-    return EqualUnmodifiableListView(_location);
+    return EqualUnmodifiableListView(_locations);
   }
 
   @override
-  String toString() {
-    return 'LocationState.data(location: $location)';
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LocationState.data(locations: $locations)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LocationState.data'))
+      ..add(DiagnosticsProperty('locations', locations));
   }
 
   @override
@@ -451,12 +479,13 @@ class _$_DataLocationState implements _DataLocationState {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_DataLocationState &&
-            const DeepCollectionEquality().equals(other._location, _location));
+            const DeepCollectionEquality()
+                .equals(other._locations, _locations));
   }
 
   @override
   int get hashCode =>
-      Object.hash(runtimeType, const DeepCollectionEquality().hash(_location));
+      Object.hash(runtimeType, const DeepCollectionEquality().hash(_locations));
 
   @JsonKey(ignore: true)
   @override
@@ -468,32 +497,32 @@ class _$_DataLocationState implements _DataLocationState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Location> location) data,
-    required TResult Function() error,
+    required TResult Function(List<Location> locations) data,
+    required TResult Function(String message, String error) error,
   }) {
-    return data(location);
+    return data(locations);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
   }) {
-    return data?.call(location);
+    return data?.call(locations);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
     required TResult orElse(),
   }) {
     if (data != null) {
-      return data(location);
+      return data(locations);
     }
     return orElse();
   }
@@ -503,7 +532,7 @@ class _$_DataLocationState implements _DataLocationState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLocationState value) initial,
     required TResult Function(_DataLocationState value) data,
-    required TResult Function(_ErrorLocationState value) error,
+    required TResult Function(ErrorLocationState value) error,
   }) {
     return data(this);
   }
@@ -513,7 +542,7 @@ class _$_DataLocationState implements _DataLocationState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
   }) {
     return data?.call(this);
   }
@@ -523,7 +552,7 @@ class _$_DataLocationState implements _DataLocationState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
     required TResult orElse(),
   }) {
     if (data != null) {
@@ -534,83 +563,129 @@ class _$_DataLocationState implements _DataLocationState {
 }
 
 abstract class _DataLocationState implements LocationState {
-  const factory _DataLocationState({required final List<Location> location}) =
+  const factory _DataLocationState({required final List<Location> locations}) =
       _$_DataLocationState;
 
-  List<Location> get location;
+  List<Location> get locations;
   @JsonKey(ignore: true)
   _$$_DataLocationStateCopyWith<_$_DataLocationState> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
 /// @nodoc
-abstract class _$$_ErrorLocationStateCopyWith<$Res> {
-  factory _$$_ErrorLocationStateCopyWith(_$_ErrorLocationState value,
-          $Res Function(_$_ErrorLocationState) then) =
-      __$$_ErrorLocationStateCopyWithImpl<$Res>;
+abstract class _$$ErrorLocationStateCopyWith<$Res> {
+  factory _$$ErrorLocationStateCopyWith(_$ErrorLocationState value,
+          $Res Function(_$ErrorLocationState) then) =
+      __$$ErrorLocationStateCopyWithImpl<$Res>;
+  $Res call({String message, String error});
 }
 
 /// @nodoc
-class __$$_ErrorLocationStateCopyWithImpl<$Res>
+class __$$ErrorLocationStateCopyWithImpl<$Res>
     extends _$LocationStateCopyWithImpl<$Res>
-    implements _$$_ErrorLocationStateCopyWith<$Res> {
-  __$$_ErrorLocationStateCopyWithImpl(
-      _$_ErrorLocationState _value, $Res Function(_$_ErrorLocationState) _then)
-      : super(_value, (v) => _then(v as _$_ErrorLocationState));
+    implements _$$ErrorLocationStateCopyWith<$Res> {
+  __$$ErrorLocationStateCopyWithImpl(
+      _$ErrorLocationState _value, $Res Function(_$ErrorLocationState) _then)
+      : super(_value, (v) => _then(v as _$ErrorLocationState));
 
   @override
-  _$_ErrorLocationState get _value => super._value as _$_ErrorLocationState;
+  _$ErrorLocationState get _value => super._value as _$ErrorLocationState;
+
+  @override
+  $Res call({
+    Object? message = freezed,
+    Object? error = freezed,
+  }) {
+    return _then(_$ErrorLocationState(
+      message: message == freezed
+          ? _value.message
+          : message // ignore: cast_nullable_to_non_nullable
+              as String,
+      error: error == freezed
+          ? _value.error
+          : error // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
 }
 
 /// @nodoc
 
-class _$_ErrorLocationState implements _ErrorLocationState {
-  const _$_ErrorLocationState();
+class _$ErrorLocationState
+    with DiagnosticableTreeMixin
+    implements ErrorLocationState {
+  const _$ErrorLocationState({required this.message, required this.error});
 
   @override
-  String toString() {
-    return 'LocationState.error()';
+  final String message;
+  @override
+  final String error;
+
+  @override
+  String toString({DiagnosticLevel minLevel = DiagnosticLevel.info}) {
+    return 'LocationState.error(message: $message, error: $error)';
+  }
+
+  @override
+  void debugFillProperties(DiagnosticPropertiesBuilder properties) {
+    super.debugFillProperties(properties);
+    properties
+      ..add(DiagnosticsProperty('type', 'LocationState.error'))
+      ..add(DiagnosticsProperty('message', message))
+      ..add(DiagnosticsProperty('error', error));
   }
 
   @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
-        (other.runtimeType == runtimeType && other is _$_ErrorLocationState);
+        (other.runtimeType == runtimeType &&
+            other is _$ErrorLocationState &&
+            const DeepCollectionEquality().equals(other.message, message) &&
+            const DeepCollectionEquality().equals(other.error, error));
   }
 
   @override
-  int get hashCode => runtimeType.hashCode;
+  int get hashCode => Object.hash(
+      runtimeType,
+      const DeepCollectionEquality().hash(message),
+      const DeepCollectionEquality().hash(error));
+
+  @JsonKey(ignore: true)
+  @override
+  _$$ErrorLocationStateCopyWith<_$ErrorLocationState> get copyWith =>
+      __$$ErrorLocationStateCopyWithImpl<_$ErrorLocationState>(
+          this, _$identity);
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() initial,
-    required TResult Function(List<Location> location) data,
-    required TResult Function() error,
+    required TResult Function(List<Location> locations) data,
+    required TResult Function(String message, String error) error,
   }) {
-    return error();
+    return error(message, this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
   }) {
-    return error?.call();
+    return error?.call(message, this.error);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? initial,
-    TResult Function(List<Location> location)? data,
-    TResult Function()? error,
+    TResult Function(List<Location> locations)? data,
+    TResult Function(String message, String error)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
-      return error();
+      return error(message, this.error);
     }
     return orElse();
   }
@@ -620,7 +695,7 @@ class _$_ErrorLocationState implements _ErrorLocationState {
   TResult map<TResult extends Object?>({
     required TResult Function(_InitialLocationState value) initial,
     required TResult Function(_DataLocationState value) data,
-    required TResult Function(_ErrorLocationState value) error,
+    required TResult Function(ErrorLocationState value) error,
   }) {
     return error(this);
   }
@@ -630,7 +705,7 @@ class _$_ErrorLocationState implements _ErrorLocationState {
   TResult? mapOrNull<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
   }) {
     return error?.call(this);
   }
@@ -640,7 +715,7 @@ class _$_ErrorLocationState implements _ErrorLocationState {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(_InitialLocationState value)? initial,
     TResult Function(_DataLocationState value)? data,
-    TResult Function(_ErrorLocationState value)? error,
+    TResult Function(ErrorLocationState value)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -650,6 +725,14 @@ class _$_ErrorLocationState implements _ErrorLocationState {
   }
 }
 
-abstract class _ErrorLocationState implements LocationState {
-  const factory _ErrorLocationState() = _$_ErrorLocationState;
+abstract class ErrorLocationState implements LocationState {
+  const factory ErrorLocationState(
+      {required final String message,
+      required final String error}) = _$ErrorLocationState;
+
+  String get message;
+  String get error;
+  @JsonKey(ignore: true)
+  _$$ErrorLocationStateCopyWith<_$ErrorLocationState> get copyWith =>
+      throw _privateConstructorUsedError;
 }

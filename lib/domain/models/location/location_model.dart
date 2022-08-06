@@ -7,7 +7,7 @@ class Location with _$Location {
   @JsonSerializable(explicitToJson: true)
   const factory Location({
     @Default('') String name,
-    @JsonKey(name: 'local_names') required LocalNames localNames,
+    @JsonKey(name: 'local_names') LocalNames? localNames,
     @Default(0.0) double lat,
     @Default(0.0) double lon,
     @Default('') String country,
