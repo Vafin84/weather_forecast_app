@@ -5,9 +5,9 @@ import 'package:weather_forecast_app/domain/blocs/forecast/forecast_bloc.dart';
 import 'package:weather_forecast_app/domain/blocs/location/location_bloc.dart';
 import 'package:weather_forecast_app/domain/interfaces/forecast_repository.dart';
 import 'package:weather_forecast_app/domain/interfaces/location_repository.dart';
-import 'package:weather_forecast_app/screens/forecast_scren.dart';
-import 'package:weather_forecast_app/screens/location_screen.dart';
 import 'package:page_transition/page_transition.dart';
+import 'package:weather_forecast_app/presentation/screens/forecast_scren.dart';
+import 'package:weather_forecast_app/presentation/screens/location_screen.dart';
 
 void main() async {
   //Инициалиазция связок

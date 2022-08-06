@@ -3,7 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/blocs/forecast/forecast_bloc.dart';
 import 'package:weather_forecast_app/domain/blocs/location/location_bloc.dart';
 import 'package:weather_forecast_app/domain/models/location/location_model.dart';
-import 'package:weather_forecast_app/widgets/loading_widget.dart';
+import 'package:weather_forecast_app/presentation/widgets/loading_widget.dart';
+import 'package:weather_forecast_app/presentation/widgets/snack_bar_widget.dart';
 
 class LocationScreen extends StatefulWidget {
   const LocationScreen({Key? key}) : super(key: key);
@@ -19,7 +20,6 @@ class _LocationScreenState extends State<LocationScreen> {
   @override
   Widget build(BuildContext context) {
     final TextTheme textTheme = Theme.of(context).textTheme;
-    final size = MediaQuery.of(context).size;
     return Scaffold(
       appBar: AppBar(
         title: const Text("Выберите город"),
@@ -28,31 +28,7 @@ class _LocationScreenState extends State<LocationScreen> {
       body: BlocConsumer<LocationBloc, LocationState>(
         listener: (context, state) {
           if (state is ErrorLocationState) {
-            final snackBar = SnackBar(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    state.message,
-                    style: textTheme.bodyLarge,
-                  ),
-                  Text(
-                    state.error,
-                    style: textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.only(left: 16, right: 16, bottom: size.height / 2 - 81),
-              action: SnackBarAction(
-                label: 'Закрыть',
-                onPressed: () {},
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBarWidget.snackBar(context, state.message, state.error));
           }
         },
         builder: (context, state) {

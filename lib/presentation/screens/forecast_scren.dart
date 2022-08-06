@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/blocs/forecast/forecast_bloc.dart';
-import 'package:weather_forecast_app/widgets/loading_widget.dart';
+import 'package:weather_forecast_app/presentation/widgets/loading_widget.dart';
+import 'package:weather_forecast_app/presentation/widgets/snack_bar_widget.dart';
 
 class ForecastScreen extends StatefulWidget {
   const ForecastScreen({Key? key}) : super(key: key);
@@ -23,31 +24,7 @@ class _ForecastScreenState extends State<ForecastScreen> {
       body: BlocConsumer<ForecastBloc, ForecastState>(
         listener: (context, state) {
           if (state is ErrorForecastState) {
-            final snackBar = SnackBar(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-              content: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    state.message,
-                    style: textTheme.bodyLarge,
-                  ),
-                  Text(
-                    state.error,
-                    style: textTheme.bodyMedium,
-                  ),
-                ],
-              ),
-              behavior: SnackBarBehavior.floating,
-              margin: EdgeInsets.only(left: 16, right: 16, bottom: size.height / 2 - 81),
-              action: SnackBarAction(
-                label: 'Закрыть',
-                onPressed: () {},
-              ),
-            );
-            ScaffoldMessenger.of(context).showSnackBar(snackBar);
+            ScaffoldMessenger.of(context).showSnackBar(SnackBarWidget.snackBar(context, state.message, state.error));
           }
         },
         builder: (context, state) {
