@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
+import 'package:bloc_concurrency/bloc_concurrency.dart';
 import 'package:flutter/foundation.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
 import 'package:weather_forecast_app/domain/interfaces/location_repository.dart';
@@ -12,18 +13,21 @@ part 'location_bloc.freezed.dart';
 
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
   LocationBloc({required LocationRepository locationRepository}) : super(const _InitialLocationState()) {
-    on<_RequestLocationEvent>((event, emit) async {
-      await locationRepository.fetch(event.request).then((responseModel) async {
-        if (responseModel.body != null) {
-          final jsonString = responseModel.body as String;
-          final locations = await compute(parseLocations, jsonString);
-          emit(LocationState.data(locations: locations));
-        } else {
-          emit(const _InitialLocationState());
-          emit(LocationState.error(message: responseModel.message, error: responseModel.error.toString()));
-        }
-      });
-    });
+    on<_RequestLocationEvent>(
+      (event, emit) async {
+        await locationRepository.fetch(event.request).then((responseModel) async {
+          if (responseModel.body != null) {
+            final jsonString = responseModel.body as String;
+            final locations = await compute(parseLocations, jsonString);
+            emit(LocationState.data(locations: locations));
+          } else {
+            emit(const _InitialLocationState());
+            emit(LocationState.error(message: responseModel.message, error: responseModel.error.toString()));
+          }
+        });
+      },
+      transformer: sequential(),
+    );
   }
 }
 

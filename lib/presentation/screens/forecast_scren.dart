@@ -38,7 +38,7 @@ class _ForecastScreenState extends State<ForecastScreen> {
               final temp = forecast.main.temp.toString();
               final tempMin = forecast.main.tempMin.toString();
               final tempMax = forecast.main.tempMax.toString();
-              final pressure = forecast.main.pressure.toString();
+              final pressure = (forecast.main.pressure / 1.333).round().toString();
               final humidity = forecast.main.humidity.toString();
               final speed = forecast.wind.speed.toString();
               final gust = forecast.wind.gust.toString();
@@ -48,10 +48,10 @@ class _ForecastScreenState extends State<ForecastScreen> {
                   children: [
                     Text(cityName, style: textTheme.headline6, textAlign: TextAlign.center),
                     ListTile(title: const Text("Сегодня"), trailing: Text(cloudCover)),
-                    ListTile(title: const Text("Tемпература, С"), trailing: Text(temp)),
-                    ListTile(title: const Text("Мин. Tемпература, С"), trailing: Text(tempMin)),
-                    ListTile(title: const Text("Макс. Tемпература, С"), trailing: Text(tempMax)),
-                    ListTile(title: const Text("Давление, мм"), trailing: Text(pressure)),
+                    ListTile(title: const Text("Tемпература, °C"), trailing: Text(temp)),
+                    ListTile(title: const Text("Мин. Tемпература,°C"), trailing: Text(tempMin)),
+                    ListTile(title: const Text("Макс. Tемпература,°C"), trailing: Text(tempMax)),
+                    ListTile(title: const Text("Давление, мм рт.ст."), trailing: Text(pressure)),
                     ListTile(title: const Text("Влажность, %"), trailing: Text(humidity)),
                     ListTile(title: const Text("Скорость ветера, м/с"), trailing: Text(speed)),
                     ListTile(title: const Text("Порывы ветера, м/с"), trailing: Text(gust)),
